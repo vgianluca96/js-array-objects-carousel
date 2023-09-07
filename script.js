@@ -14,7 +14,7 @@ let btnForward = document.getElementById('btnForward');
 let btnBackward = document.getElementById('btnBackward');
 let btnCarouselStart = document.getElementById('btnCarouselStart');
 let btnCarouselStop = document.getElementById('btnCarouselStop');
-btnCarouselReverse =  document.getElementById('btnCarouselReverse');
+let btnCarouselReverse =  document.getElementById('btnCarouselReverse');
 
 // Inizializzo l'array contenente gli oggetti immagini e creo le card (solo la prima visibile)
 for (i = 1; i <= imgNumber; i++) {
