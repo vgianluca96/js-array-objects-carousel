@@ -4,6 +4,7 @@
 let imgNumber = 5;
 let carouselArray = [];
 let carousel = document.getElementById('carousel');
+let carouselMiniatures = document.getElementById('carouselMiniatures');
 let btnForward = document.getElementById('btnForward');
 let btnBackward = document.getElementById('btnBackward');
 
@@ -13,7 +14,7 @@ for (i = 1; i <= imgNumber; i++) {
     let carouselArrayElem = {
         path: 'https://picsum.photos/400/300?random=' + i,
         title: 'Image ' + i,
-        text: 'Image taken from Lorem Picsum'
+        text: 'Image number ' + i + ' taken from Lorem Picsum'
     }
     carouselArray.push(carouselArrayElem);
 
@@ -29,15 +30,23 @@ for (i = 1; i <= imgNumber; i++) {
     
         </div>
     `;
+    
+    carouselMiniatures.innerHTML += `
+    <div id="Miniature${i}" class="p-1">
+        <img src="${carouselArrayElem.path}" width="100">
+    </div>
+    `;
 
     if (i != 1) {
 
         let carouselCard = document.getElementById('carouselCard' + i);
+        let carouselMiniature = document.getElementById('Miniature' + i);
 
-        //console.log(carouselCard.classList);
         carouselCard.classList.add('d-none');
+        carouselMiniature.classList.add('opacity-25');
 
     }
+
 
 }
 
@@ -49,33 +58,43 @@ let carouselPosition = 1;
 btnForward.addEventListener('click', function() {
 
     let carouselCardToHide = document.getElementById('carouselCard' + carouselPosition);
+    let carouselMiniatureToHide = document.getElementById('Miniature' + carouselPosition);
 
     if (carouselPosition == imgNumber) {
         carouselPosition = 0;    
     }
 
     let carouselCardToShow = document.getElementById('carouselCard' + (carouselPosition + 1));
+    let carouselMiniatureToShow = document.getElementById('Miniature' + (carouselPosition + 1));
 
     carouselPosition += 1;
 
     carouselCardToHide.classList.add('d-none');
     carouselCardToShow.classList.remove('d-none');
 
+    carouselMiniatureToHide.classList.add('opacity-25');
+    carouselMiniatureToShow.classList.remove('opacity-25');
+
 })
 
 btnBackward.addEventListener('click', function() {
     
     let carouselCardToHide = document.getElementById('carouselCard' + carouselPosition);
+    let carouselMiniatureToHide = document.getElementById('Miniature' + carouselPosition);
     
     if (carouselPosition == 1) {
         carouselPosition = imgNumber + 1;    
     }
     
     let carouselCardToShow = document.getElementById('carouselCard' + (carouselPosition - 1));
+    let carouselMiniatureToShow = document.getElementById('Miniature' + (carouselPosition - 1));
 
     carouselPosition -= 1;
 
     carouselCardToHide.classList.add('d-none');
     carouselCardToShow.classList.remove('d-none');
+
+    carouselMiniatureToHide.classList.add('opacity-25');
+    carouselMiniatureToShow.classList.remove('opacity-25');
 
 })
