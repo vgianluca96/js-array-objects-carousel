@@ -3,12 +3,18 @@
 // Inizializzo variabili utili
 let imgNumber = 5;
 let carouselArray = [];
+let carouselPosition = 1;
+let playCarousel;
+let reverse = 1;
+
+// Seleziono elementi DOM
 let carousel = document.getElementById('carousel');
 let carouselMiniatures = document.getElementById('carouselMiniatures');
 let btnForward = document.getElementById('btnForward');
 let btnBackward = document.getElementById('btnBackward');
 let btnCarouselStart = document.getElementById('btnCarouselStart');
 let btnCarouselStop = document.getElementById('btnCarouselStop');
+btnCarouselReverse =  document.getElementById('btnCarouselReverse');
 
 // Inizializzo l'array contenente gli oggetti immagini e creo le card (solo la prima visibile)
 for (i = 1; i <= imgNumber; i++) {
@@ -54,30 +60,41 @@ for (i = 1; i <= imgNumber; i++) {
 
 console.log(carouselArray);
 
-// Inizializzo variabile che mi dice a quale card siamo
-let carouselPosition = 1;
-
+// Creo event listener
 btnForward.addEventListener('click', forwardImg);
 btnBackward.addEventListener('click', backwardImg);
-
 btnCarouselStart.addEventListener('click', startCarousel);
 btnCarouselStop.addEventListener('click', stopCarousel);
+btnCarouselReverse.addEventListener('click', reverseCarousel);
 
 
-let go;
+
+/* Sezione function */
 
 function startCarousel() {
-
-    if (!go) {
-        go = setInterval(forwardImg, 1000);
+    
+    if (!playCarousel) {
+        if (reverse == 1) {
+            playCarousel = setInterval(forwardImg, 1000);
+        } else if (reverse == -1) {
+            playCarousel = setInterval(backwardImg, 1000);
+        }
     }
-
+    
 }
 
 function stopCarousel() {
     
-    clearInterval(go);
-    go = null;
+    clearInterval(playCarousel);
+    playCarousel = null;
+
+}
+
+function reverseCarousel() {
+    
+    stopCarousel();
+    reverse *= -1;
+    alert('Ciclo carosello invertito, premere nuovamente avvio');
 
 }
 
