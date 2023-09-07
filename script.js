@@ -7,6 +7,8 @@ let carousel = document.getElementById('carousel');
 let carouselMiniatures = document.getElementById('carouselMiniatures');
 let btnForward = document.getElementById('btnForward');
 let btnBackward = document.getElementById('btnBackward');
+let btnCarouselStart = document.getElementById('btnCarouselStart');
+let btnCarouselStop = document.getElementById('btnCarouselStop');
 
 // Inizializzo l'array contenente gli oggetti immagini e creo le card (solo la prima visibile)
 for (i = 1; i <= imgNumber; i++) {
@@ -55,7 +57,31 @@ console.log(carouselArray);
 // Inizializzo variabile che mi dice a quale card siamo
 let carouselPosition = 1;
 
-btnForward.addEventListener('click', function() {
+btnForward.addEventListener('click', forwardImg);
+btnBackward.addEventListener('click', backwardImg);
+
+btnCarouselStart.addEventListener('click', startCarousel);
+btnCarouselStop.addEventListener('click', stopCarousel);
+
+
+let go;
+
+function startCarousel() {
+
+    if (!go) {
+        go = setInterval(forwardImg, 1000);
+    }
+
+}
+
+function stopCarousel() {
+    
+    clearInterval(go);
+    go = null;
+
+}
+
+function forwardImg() {
 
     let carouselCardToHide = document.getElementById('carouselCard' + carouselPosition);
     let carouselMiniatureToHide = document.getElementById('Miniature' + carouselPosition);
@@ -75,9 +101,9 @@ btnForward.addEventListener('click', function() {
     carouselMiniatureToHide.classList.add('opacity-25');
     carouselMiniatureToShow.classList.remove('opacity-25');
 
-})
+}
 
-btnBackward.addEventListener('click', function() {
+function backwardImg() {
     
     let carouselCardToHide = document.getElementById('carouselCard' + carouselPosition);
     let carouselMiniatureToHide = document.getElementById('Miniature' + carouselPosition);
@@ -97,4 +123,4 @@ btnBackward.addEventListener('click', function() {
     carouselMiniatureToHide.classList.add('opacity-25');
     carouselMiniatureToShow.classList.remove('opacity-25');
 
-})
+}
