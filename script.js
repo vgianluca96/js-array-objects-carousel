@@ -1,9 +1,13 @@
 
 
+// Inizializzo variabili utili
 let imgNumber = 5;
 let carouselArray = [];
 let carousel = document.getElementById('carousel');
+let btnForward = document.getElementById('btnForward');
+let btnBackward = document.getElementById('btnBackward');
 
+// Inizializzo l'array contenente gli oggetti immagini e creo le card (solo la prima visibile)
 for (i = 1; i <= imgNumber; i++) {
 
     let carouselArrayElem = {
@@ -19,11 +23,8 @@ for (i = 1; i <= imgNumber; i++) {
             <img src="${carouselArrayElem.path}" class="card-img-top">
     
             <div class="card-body">
-
                 <h5 class="card-title">${carouselArrayElem.title}</h5>
-
                 <p class="card-text">${carouselArrayElem.text}</p>
-    
             </div>
     
         </div>
@@ -41,3 +42,40 @@ for (i = 1; i <= imgNumber; i++) {
 }
 
 console.log(carouselArray);
+
+// Inizializzo variabile che mi dice a quale card siamo
+let carouselPosition = 1;
+
+btnForward.addEventListener('click', function() {
+
+    let carouselCardToHide = document.getElementById('carouselCard' + carouselPosition);
+
+    if (carouselPosition == imgNumber) {
+        carouselPosition = 0;    
+    }
+
+    let carouselCardToShow = document.getElementById('carouselCard' + (carouselPosition + 1));
+
+    carouselPosition += 1;
+
+    carouselCardToHide.classList.add('d-none');
+    carouselCardToShow.classList.remove('d-none');
+
+})
+
+btnBackward.addEventListener('click', function() {
+    
+    let carouselCardToHide = document.getElementById('carouselCard' + carouselPosition);
+    
+    if (carouselPosition == 1) {
+        carouselPosition = imgNumber + 1;    
+    }
+    
+    let carouselCardToShow = document.getElementById('carouselCard' + (carouselPosition - 1));
+
+    carouselPosition -= 1;
+
+    carouselCardToHide.classList.add('d-none');
+    carouselCardToShow.classList.remove('d-none');
+
+})
